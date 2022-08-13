@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from "react-redux";
 
@@ -11,6 +11,7 @@ import makeStyles from './styles';
 
 
 const App = () => {
+    const [currentId, setCurrentId] = useState(null);
     const classes = makeStyles();
     const dispatch = useDispatch();
 
@@ -20,10 +21,10 @@ const App = () => {
 
 
     return (
-     <Container className={classes.appBar}  maxidth='lg' >
+     <Container className={classes.appBar}  >
           <AppBar postion='static' color="inherit">
             <Typography className={classes.heading} variant="h2" align="center" >Memories</Typography>
-            <img className={classes.image} src={memories} alt="memories" height="60" />
+            <img className={classes.image} src={memories} alt="memories" height="10" />
           </AppBar>
           <Grow in >
             <Container>

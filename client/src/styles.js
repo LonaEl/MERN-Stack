@@ -5,7 +5,8 @@ export default makeStyles(() =>({
         borderRadius: 15,
         margin: '30px 0',
         display: 'flex',
-        flexDirection: 'row',
+        
+        flexDirection: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       },
@@ -13,6 +14,6 @@ export default makeStyles(() =>({
         color: 'rgba(0,183,255, 1)',
       },
       image: {
-        marginLeft: '15px',
+        marginLeft: '20px',
       },
 }));
