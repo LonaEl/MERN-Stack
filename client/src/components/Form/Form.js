@@ -16,7 +16,7 @@ const Form = ({ currentId,setCurrentId }) => {
         tags: '',
         selectedFile: '',
     });
-    const post = useSelector((state) =>currentId ? state.posts.find((p) => p._id === currentId) : null )
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null )
     const classes = makeStyles();
     const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const Form = ({ currentId,setCurrentId }) => {
       }
       clear();
     }
-
+ 
     const clear = () => {
       setCurrentId(null);
       setPostData({ creator: '', title: '', message:'', tags: '', selectedFile: '' })
@@ -44,7 +44,7 @@ const Form = ({ currentId,setCurrentId }) => {
     return (
     <Paper className={classes.paper} >
     <form autoComplete="off" noValidate className={`${classes.root}${classes.form}` } onSubmit={handleSubmit}  >
-       <Typography variant="h6">{currentId ? 'Editing' :  'Creating' } a memory </Typography>
+       <Typography variant="h6"> {currentId ? 'Editing' :  'Creating' } a memory </Typography>
 
    <TextField 
        name="creator" 
@@ -82,7 +82,10 @@ const Form = ({ currentId,setCurrentId }) => {
        onChange={ (e) => setPostData({ ...postData, tags: e.target.value})}
      />
       <div className={classes.fileInput}>
-       <FileBase type="file" multiple={false} onDone={({base64}) => setPostData({...postData, selectedFile: base64})}
+       <FileBase 
+       type="file" 
+       multiple={false} 
+       onDone={({base64}) => setPostData({...postData, selectedFile: base64})}
        />
       </div>
 

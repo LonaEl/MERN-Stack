@@ -16,7 +16,7 @@ const store = legacy_createStore(reducers, compose(applyMiddleware(thunk)))
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>    <App />  </Provider>
+    <Provider store={store}> <App />  </Provider>,
     
   </React.StrictMode>
 );
