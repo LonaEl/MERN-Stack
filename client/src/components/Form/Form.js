@@ -79,7 +79,7 @@ const Form = ({ currentId,setCurrentId }) => {
        label="Tags" 
        fullWidth 
        value={postData.tags} //whole data in our form is stored here
-       onChange={ (e) => setPostData({ ...postData, tags: e.target.value})}
+       onChange={ (e) => setPostData({ ...postData, tags: e.target.value.split(', ') })}
      />
       <div className={classes.fileInput}>
        <FileBase 
