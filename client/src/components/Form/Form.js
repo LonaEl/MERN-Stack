@@ -6,8 +6,6 @@ import  { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from "../../actions/posts";
 
 
-
-
 const Form = ({ currentId,setCurrentId }) => {
     const [postData, setPostData] = useState({
         creator: '',
@@ -16,35 +14,37 @@ const Form = ({ currentId,setCurrentId }) => {
         tags: '',
         selectedFile: '',
     });
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null )
-    const classes = makeStyles();
+    const post = useSelector((state) => currentId ? state.posts.find((message) => message._id === currentId) : null )
+  
     const dispatch = useDispatch();
+    const classes = makeStyles();
 
     useEffect(() => {
-     if(post) setPostData(post);
+     if (post) setPostData(post);
     }, [post])
-    
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if(currentId) {
-        dispatch(updatePost(currentId, postData))
-      } else {
-
-        dispatch(createPost(postData));
-      }
-      clear();
-    }
- 
     const clear = () => {
-      setCurrentId(null);
+      setCurrentId(0);
       setPostData({ creator: '', title: '', message:'', tags: '', selectedFile: '' })
     }
+    
 
-    return (
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      if(currentId === 0 ) {
+        dispatch(createPost(postData));
+        clear();
+      } else {
+        dispatch(updatePost(currentId, postData))
+        clear();
+      }
+   };
+ 
+   return (
     <Paper className={classes.paper} >
-    <form autoComplete="off" noValidate className={`${classes.root}${classes.form}` } onSubmit={handleSubmit}  >
-       <Typography variant="h6"> {currentId ? 'Editing' :  'Creating' } a memory </Typography>
+    <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+       <Typography variant="h6"> {currentId ? `Editing "$post.title"` : 'Creating a Memory'} </Typography>
 
    <TextField 
        name="creator" 
@@ -91,9 +91,8 @@ const Form = ({ currentId,setCurrentId }) => {
 
 <Button className={classes.buttonSubmit} variant="contained" size="large" type="submit" color="primary" fullWidth >Submit</Button>
 <Button onClick={clear} variant="contained" size="small" type="submit" color="secondary" fullWidth >Clear</Button>
-
-      </form>
-    </Paper>
-    )
-}
+</form>
+</Paper>
+  );
+};
 export default Form;
